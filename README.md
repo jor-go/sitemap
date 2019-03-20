@@ -1,5 +1,5 @@
-# Sitemap Builder
-
+# Golang Sitemap Builder
+[![GoDoc](https://godoc.org/github.com/jor-go/sitemap?status.svg)](https://godoc.org/github.com/jor-go/sitemap)
 
 ### Import
 ```golang
