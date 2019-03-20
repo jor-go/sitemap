@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"sitemap"
+	"github.com/jor-go/sitemap"
 )
 
 func main() {
@@ -27,6 +27,6 @@ func main() {
 
 	err := mySitemap.GenerateAndSave("/tmp/sitemap.xml")
 	if err != nil {
-		fmt.Prinln(err)
+		fmt.Println(err)
 	}
 }

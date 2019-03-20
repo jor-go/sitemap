@@ -39,7 +39,7 @@ func main() {
 
     err := mySitemap.GenerateAndSave("/tmp/sitemap.xml")
     if err != nil {
-        fmt.Prinln(err)
+        fmt.Println(err)
     }
 }
 ```
@@ -47,5 +47,25 @@ func main() {
 
 ### Output
 ```xml
-
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+   <url>
+      <loc>https://example.com/page-1</loc>
+      <lastmod>2019-03-19</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://example.com/page-2</loc>
+      <lastmod>2019-03-19</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+   </url>
+   <url>
+      <loc>https://example.com/page-3</loc>
+      <lastmod>2019-03-19</lastmod>
+      <changefreq>daily</changefreq>
+      <priority>0.5</priority>
+   </url>
+</urlset>
 ```
