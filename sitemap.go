@@ -33,7 +33,7 @@ func (s *Sitemap) AddURLs(u []URL) {
 /*Generate : Creates sitemap []byte*/
 func (s *Sitemap) Generate() ([]byte, error) {
 	if s.Format == "" {
-		s.Format = ""
+		s.Format = xml.Header
 	}
 
 	if s.XMLNS == "" {
@@ -50,7 +50,7 @@ func (s *Sitemap) Generate() ([]byte, error) {
 		return []byte{}, errors.New("sitemap.Sitemap.Generate() : Problem Marshaling XML -> " + err.Error())
 	}
 
-	header := []byte(xml.Header)
+	header := []byte(s.Format)
 
 	final := append(header, data...)
 
