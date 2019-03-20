@@ -69,3 +69,14 @@ func main() {
    </url>
 </urlset>
 ```
+
+### Generate Sitemap as Bytes
+```golang
+
+bytes, err := mySitemap.Generate()
+if err != nil {
+    fmt.Println(err)
+}
+
+// use bytes
+```

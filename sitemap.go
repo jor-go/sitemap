@@ -87,9 +87,13 @@ func (u *URL) TimeToLastMod(t time.Time) {
 }
 
 /*New : Creates a new URL for the sitemap.
+
 location: URL e.g. https://...
+
 changeFrequency: "always", "hourly", "daily", "weekly", "monthly", "yearly", or "never"
+
 priority: float between 0.0 and 1.0
+
 lastModified: time.Time of the last time link was modified
 */
 func (u *URL) New(location, changeFrequency string, priority float64, lastModified time.Time) error {
