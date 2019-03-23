@@ -12,7 +12,7 @@ import (
 var validFrequencies = []string{"always", "hourly", "daily", "weekly", "monthly", "yearly", "never"}
 var defaultXMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
-/*Sitemap : Holds all the urls in the sitemap*/
+// Sitemap Holds all the urls in the sitemap
 type Sitemap struct {
 	Format  string   `xml:",innerxml"`
 	XMLName xml.Name `xml:"urlset"`
@@ -20,17 +20,17 @@ type Sitemap struct {
 	URLS    []URL    `xml:"url"`
 }
 
-/*AddURL : Adds a single URL to the sitemap*/
+// AddURL Adds a single URL to the sitemap
 func (s *Sitemap) AddURL(u URL) {
 	s.URLS = append(s.URLS, u)
 }
 
-/*AddURLs : Adds multiple URLs to the Sitemap*/
+// AddURLs Adds multiple URLs to the Sitemap
 func (s *Sitemap) AddURLs(u []URL) {
 	s.URLS = append(s.URLS, u...)
 }
 
-/*Generate : Creates sitemap []byte*/
+// Generate Creates sitemap []byte
 func (s *Sitemap) Generate() ([]byte, error) {
 	if s.Format == "" {
 		s.Format = xml.Header
@@ -57,7 +57,7 @@ func (s *Sitemap) Generate() ([]byte, error) {
 	return final, nil
 }
 
-/*GenerateAndSave : Generates and saves to filepath e.g. "/path/to/your/sitemap.xml"*/
+// GenerateAndSave Generates and saves to filepath e.g. "/path/to/your/sitemap.xml"
 func (s *Sitemap) GenerateAndSave(path string) error {
 	bytes, err := s.Generate()
 
@@ -73,7 +73,7 @@ func (s *Sitemap) GenerateAndSave(path string) error {
 	return nil
 }
 
-/*URL : is a url for the sitemap*/
+// URL is a url for the sitemap
 type URL struct {
 	Loc        string `xml:"loc"`
 	LastMod    string `xml:"lastmod"`
@@ -81,21 +81,20 @@ type URL struct {
 	Priority   string `xml:"priority"`
 }
 
-/*TimeToLastMod : Convert a time.Time to the last modified date as a string*/
+// TimeToLastMod Convert a time.Time to the last modified date as a string
 func (u *URL) TimeToLastMod(t time.Time) {
 	u.LastMod = t.Format("2006-01-02")
 }
 
-/*New : Creates a new URL for the sitemap.
-
-location: URL e.g. https://...
-
-changeFrequency: "always", "hourly", "daily", "weekly", "monthly", "yearly", or "never"
-
-priority: float between 0.0 and 1.0
-
-lastModified: time.Time of the last time link was modified
-*/
+// New Creates a new URL for the sitemap.
+//
+// location: URL e.g. https://...
+//
+// changeFrequency: "always", "hourly", "daily", "weekly", "monthly", "yearly", or "never"
+//
+// priority: float between 0.0 and 1.0
+//
+// lastModified: time.Time of the last time link was modified
 func (u *URL) New(location, changeFrequency string, priority float64, lastModified time.Time) error {
 	// make sure location is a valid URL
 	if _, err := url.ParseRequestURI(location); err != nil {
