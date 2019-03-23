@@ -65,7 +65,7 @@ func (s *Sitemap) GenerateAndSave(path string) error {
 		return err
 	}
 
-	err = ioutil.WriteFile(path, bytes, 666)
+	err = ioutil.WriteFile(path, bytes, 0664)
 	if err != nil {
 		return err
 	}
