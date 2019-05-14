@@ -14,7 +14,6 @@ var defaultXMLNS = "http://www.sitemaps.org/schemas/sitemap/0.9"
 
 // Sitemap Holds all the urls in the sitemap
 type Sitemap struct {
-	Format  string   `xml:",innerxml"`
 	XMLName xml.Name `xml:"urlset"`
 	XMLNS   string   `xml:"xmlns,attr"`
 	URLS    []URL    `xml:"url"`
@@ -32,10 +31,6 @@ func (s *Sitemap) AddURLs(u []URL) {
 
 // Generate Creates sitemap []byte
 func (s *Sitemap) Generate() ([]byte, error) {
-	if s.Format == "" {
-		s.Format = xml.Header
-	}
-
 	if s.XMLNS == "" {
 		s.XMLNS = defaultXMLNS
 	}
@@ -50,7 +45,7 @@ func (s *Sitemap) Generate() ([]byte, error) {
 		return []byte{}, errors.New("sitemap.Sitemap.Generate() : Problem Marshaling XML -> " + err.Error())
 	}
 
-	header := []byte(s.Format)
+	header := []byte(xml.Header)
 
 	final := append(header, data...)
 
