@@ -1,14 +1,14 @@
 package main
 
 import (
-	"fmt"
+	"log"
 	"time"
 
 	"github.com/jor-go/sitemap"
 )
 
 func main() {
-	var mySitemap sitemap.Sitemap
+	var sm sitemap.Sitemap
 	siteLinks := []string{
 		"https://example.com/page-1",
 		"https://example.com/page-2",
@@ -16,17 +16,14 @@ func main() {
 	}
 
 	for _, link := range siteLinks {
-		url := sitemap.URL{}
-		err := url.New(link, "daily", 0.5, time.Now())
-		if err != nil {
-			fmt.Println(err)
-			break
+		var u sitemap.URL
+		if err := u.New(link, "daily", 0.5, time.Now()); err != nil {
+			log.Fatal(err)
 		}
-		mySitemap.AddURL(url)
+		sm.AddURL(u)
 	}
 
-	err := mySitemap.GenerateAndSave("/tmp/sitemap.xml")
-	if err != nil {
-		fmt.Println(err)
+	if err := sm.GenerateAndSave("/tmp/sitemap.xml"); err != nil {
+		log.Fatal(err)
 	}
 }
